@@ -1,5 +1,5 @@
 from django.db import models
-from time_slip_app import TimeSlip
+from time_slip_app.models import TimeSlip
 
 # Create your models here.
 class WeatherCondition(models.Model):

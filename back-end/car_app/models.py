@@ -1,5 +1,5 @@
 from django.db import models
-from user_app import Client
+from user_app.models import Client
 from .validators import validate_four_digits, validate_horsepower, validate_weight
 
 # Create your models here.

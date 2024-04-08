@@ -1,5 +1,5 @@
 from django.db import models
-from car_app import Car
+from car_app.models import Car
 
 # Create your models here.
 class TimeSlip(models.Model):

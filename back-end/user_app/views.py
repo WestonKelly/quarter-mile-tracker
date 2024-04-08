@@ -20,11 +20,11 @@ class Sign_Up(APIView):
         try:
             email = request.data.get("email")
             password = request.data.get("password")
-            new_user = Client.objects.create()
+            new_user = Client.objects.create(email=email)
             new_user.set_password(password)
             new_user.save()
             token, _ = Token.objects.get_or_create(user=new_user)
             return Response({"client": new_user.email, "token": token.key}, status=HTTP_201_CREATED)
         except Exception as e:
-            return Response(srt(e), status=HTTP_400_BAD_REQUEST)
+            return Response(str(e), status=HTTP_400_BAD_REQUEST)
         
