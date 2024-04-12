@@ -25,7 +25,7 @@ class Sign_Up(APIView):
             new_user.save()
             login(request, new_user)
             token, _ = Token.objects.get_or_create(user=new_user)
-            return Response({"client": new_user.email, "token": token.key}, status=HTTP_201_CREATED)
+            return Response({"user": new_user.email, "token": token.key}, status=HTTP_201_CREATED)
         except Exception as e:
             return Response(str(e), status=HTTP_400_BAD_REQUEST)
         
@@ -38,7 +38,7 @@ class Log_in(APIView):
         if user:
             login(request, user)
             token, created = Token.objects.get_or_create(user=user)
-            return Response({"client": user.email, "token":token.key}, status=HTTP_200_OK)
+            return Response({"user": user.email, "token":token.key}, status=HTTP_200_OK)
         return Response("No user matching credentials", status=HTTP_400_BAD_REQUEST)
     
 class TokenReq(APIView):
@@ -53,4 +53,5 @@ class Log_out(TokenReq):
         return Response(status=HTTP_204_NO_CONTENT)
 
 class Info(TokenReq):
-    pass        
+    def get(self, request):
+        return Response({"user": request.user.email})        
