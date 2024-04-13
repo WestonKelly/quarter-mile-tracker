@@ -1,7 +1,12 @@
 import { useOutletContext } from "react-router-dom"
 
 const HomePage = () => {
-    return <h1>Welcome</h1>;
+    const { user } = useOutletContext();
+    return (
+        <>
+        <h1>Welcome!{user && ` ${user}`}</h1>
+        </>
+    )
 };
 
 export default HomePage;

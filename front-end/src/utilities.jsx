@@ -1,20 +1,77 @@
-import { Axios } from "axios";
+import axios from "axios";
 
 export const api = axios.create({
     baseURL: "http://127.0.0.1:8000/api/v1/"
 });
 
 export const userRegistration = async (email, password) => {
-    let response = await api.post("users/signup", {
+    let response = await api.post("users/signup/", {
         email: email,
         password: password,
     });
     if (response.status === 201) {
-        let { user, token } = resoonse.data;
+        let { user, token } = response.data;
         localStorage.setItem("token", token);
         api.defaults.headers.common["Authorization"] = `Token ${token}`;
         return user;
     }
     alert(response.data);
     return null;
+};
+
+export const userLogIn = async (email, password) => {
+    let response = await api.post("users/login/", {
+        email: email,
+        password: password,
+    });
+    if (response.status === 200) {
+        let {user, token} = response.data;
+        localStorage.setItem("token", token);
+        api.defaults.headers.common["Authorization"] = `Token ${token}`;
+        console.log(`user: ${user}, token: ${token}`)
+        console.log(token)
+        console.log(response.data)
+        return user;
+    }
+    alert(response.data);
+    return null;
+};
+
+export const userLogOut = async () => {
+    let response = await api.post("users/logout/");
+    if (response.status === 204) {
+        localStorage.removeItem("token");
+        delete api.defaults.headers.common["Authorization"];
+        return null;
+    }
+    alert("Something went wrong and logout failed");
+};
+
+export const userConfirmation = async () => {
+    let token = localStorage.getItem("token");
+    if (token) {
+        api.defaults.headers.common["Authorization"] = `Token ${token}`;
+        let response = await api.get("users/");
+        if (response.status === 200) {
+            console.log(response.data.user);
+            return response.data.user;
+        }
+        delete api.defaults.headers.common["Authorization"];
+    }
+    return null;
+};
+
+export const getUserCars = async () => {
+    try {
+        let response = await api.get("cars/all/");
+        if (response.status === 200) {
+            console.log(response.data)
+            return response.data;
+        }
+        alert(response.data);
+        return [];
+    } catch (e) {
+        alert(e.message);
+        return [];
+    }
 };
