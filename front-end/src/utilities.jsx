@@ -75,3 +75,26 @@ export const getUserCars = async () => {
         return [];
     }
 };
+
+export const createCar = async (newCarData) => {
+    try {
+        let token = localStorage.getItem("token");
+        if (token) {
+            api.defaults.headers.common["Authorization"] = `Token ${token}`;
+        }
+
+        const response = await api.post("cars/create/", newCarData);
+
+        if (response.status === 201) {
+            console.log(response.data);
+            console.log(response.status)
+            return response.data;
+        } else {
+            console.error('Failed to create car:', response.statusText);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error creating car:', error.message);
+        return null;
+    }
+};
