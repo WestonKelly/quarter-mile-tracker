@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getUserCars, createCar } from "../utilities";
+import { getUserCars, createCar, deleteCar } from "../utilities";
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -24,6 +24,7 @@ const Cars = () => {
     const fetchCars = async () => {
         setCars(await getUserCars());
     };
+
     
     useEffect(() => {
         fetchCars();
@@ -32,6 +33,7 @@ const Cars = () => {
     const handleAddCar = async () => {
         const success = await createCar(newCarData);
         if (success) {
+          console.log(`Success: ${success}`);
             await fetchCars();
             handleCloseModal();
         }
@@ -44,6 +46,15 @@ const Cars = () => {
             [name]: value
         });
     };
+
+    const handleDeleteCar = async (carId) => {
+      const confirmDelete = window.confirm("Are your sure you want to delete this car?")
+      if (confirmDelete) {
+        await deleteCar(carId);
+        await fetchCars();
+        }
+      }
+    
 
     return (
         <Container>
@@ -58,6 +69,7 @@ const Cars = () => {
                     Horsepower: {car.horsepower}<br />
                     Weight: {car.weight}
                   </Card.Text>
+                  <Button variant="danger" onClick={() => handleDeleteCar(car.id)}>Delete</Button>
                 </Card.Body>
               </Card>
             </Col>

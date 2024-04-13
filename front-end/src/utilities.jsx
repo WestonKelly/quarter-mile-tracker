@@ -98,3 +98,17 @@ export const createCar = async (newCarData) => {
         return null;
     }
 };
+
+export const deleteCar = async (carId) => {
+    try {
+        let response = await api.delete(`cars/delete/${carId}/`);
+        if (response.status === 204) {
+            return response.data;
+        }
+        alert(response.data);
+        return null;
+    } catch (e) {
+        alert(e.message);
+        return null;
+    }
+};
