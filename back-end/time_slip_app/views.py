@@ -1,4 +1,5 @@
 import os
+import json
 from dotenv import load_dotenv
 from django.shortcuts import render
 from rest_framework.status import (
@@ -84,37 +85,63 @@ class GenerateAiTime(TokenReq):
             return Response({"message": "Car not found"}, status=HTTP_404_NOT_FOUND)
 
 
-        prompt = f"""Generate a quarter mile racing time slip for a car with {car.horsepower} horsepower that weighs {car.weight}. Provide the response with the following data points: 
-                'reaction_time':,
-                'sixty_foot_time':,
-                'three_thirty_foot_time':,
-                'eighth_mile_time':,
-                'quarter_mile_time':,
-                'trap_speed':
-        Provide values that are somewhat randomized but mostly realistic for a car with good traction and a track with good conditions."""
-
-        openai_response = client.chat.completions.create(model="gpt-3.5-turbo",
-        messages=[
+        openai_response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
             {
                 "role": "system",
-                "content": """You will be privided the weight and horsepower numbers for a car and your task is to generate a quarter mile drag racing time slip with the following data points:
+                "content": """You will be provided the weight and horsepower numbers for a car and your task is to generate a quarter mile drag racing time slip with the following data points in a json format:
                 'reaction_time':,
                 'sixty_foot_time':,
                 'three_thirty_foot_time':,
                 'eighth_mile_time':,
                 'quarter_mile_time':,
                 'trap_speed':
-                 and provide values that are slightly randomized but still mostly accurate for a car with good traction of a track with good conditions."""
+                 and provide values that are slightly randomized so that the values are not round but still mostly accurate for a car with good traction of a track with good conditions."""
             },
             {
                 "role": "user",
                 "content": f"This particular car produces {car.horsepower} and weighs {car.weight} pounds."
             }
-        ],
-        temperature=0.7,
-        max_tokens=200,
+            ],
+            temperature=0.7,
+            max_tokens=200,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
         )
 
-        generated_time_slip = openai_response.choices[0].message
+        generated_time_slip = openai_response.choices[0].message.content
         print(generated_time_slip)
+        print(f"Type of data is: {type(generated_time_slip)}")
+
+        response_data_str = generated_time_slip
+        try:
+            response_data = json.loads(response_data_str)
+        except json.JSONDecodeError as e:
+            print("Error decoding JSON:", e)
+            return Response({"message": "Error decoding JSON"}, status=HTTP_400_BAD_REQUEST)
+        
+        reaction_time = response_data.get("reaction_time")
+        sixty_foot_time = response_data.get("sixty_foot_time")
+        three_thirty_foot_time = response_data.get("three_thirty_foot_time")
+        eighth_mile_time = response_data.get("eighth_mile_time")
+        quarter_mile_time = response_data.get("quarter_mile_time")
+        trap_speed = response_data.get("trap_speed")
+
+        time_slip_data = {
+            "car": car_id,
+            "reaction_time": reaction_time,
+            "sixty_foot_time": sixty_foot_time,
+            "three_thirty_foot_time": three_thirty_foot_time,
+            "eighth_mile_time": eighth_mile_time,
+            "quarter_mile_time": quarter_mile_time,
+            "trap_speed": trap_speed
+        }
+
+        serializer = TimeSlipSerializer(data=time_slip_data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=HTTP_201_CREATED)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
