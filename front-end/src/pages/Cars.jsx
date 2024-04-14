@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getUserCars, createCar, deleteCar, updateCar } from "../utilities";
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
@@ -87,6 +88,9 @@ const Cars = () => {
                   </Card.Text>
                   <Button variant="danger" onClick={() => handleDeleteCar(car.id)}>Delete</Button>
                   <Button variant="primary" onClick={() => handleShowEditModal(car)}>Edit</Button>
+                  <Link to={`/race/${car.id}`}>
+                    <Button variant="success">Race!</Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </Col>
