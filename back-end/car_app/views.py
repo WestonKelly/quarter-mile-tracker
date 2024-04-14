@@ -57,3 +57,14 @@ class ReviewCar(TokenReq):
             return Response({"message": "Car found "}, status=HTTP_404_NOT_FOUND)
         serializer = CarSerializer(car)
         return Response(serializer.data, status=HTTP_200_OK)
+    
+class UserCars(TokenReq):
+    def get(self, request):
+        cars = Car.objects.filter(user=request.user)
+        print(cars)
+        print(request)
+        if not cars:
+            return Response({"message": "User has no cars"}, status=HTTP_404_NOT_FOUND)
+        serializer = CarSerializer(cars, many=True)
+        return Response(serializer.data, status=HTTP_200_OK)
+        
