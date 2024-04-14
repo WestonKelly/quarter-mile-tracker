@@ -112,3 +112,18 @@ export const deleteCar = async (carId) => {
         return null;
     }
 };
+
+export const updateCar = async (carId, newCarData) => {
+    try {
+        let response = await api.put(`cars/update/${carId}/`, newCarData);
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            console.error('Failed to edit car:', response.statusText);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error editing car:', error.message);
+        return null;
+    }
+};
