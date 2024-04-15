@@ -62,6 +62,16 @@ class ReviewTimeSlip(TokenReq):
              return Response({"message": "Time slip not found"}, status=HTTP_404_NOT_FOUND)
         serializer = TimeSlipSerializer(time_slip)
         return Response(serializer.data, status=HTTP_200_OK)
+    
+class TimeSlipsByCar(TokenReq):
+    def get(self, request, car_id):
+        try:
+            user = request.user
+            time_slips = TimeSlip.objects.filter(car__id=car_id, car__user=user)
+        except TimeSlip.DoesNotExist:
+            return Response({"message": "Time slips not found"}, status=HTTP_404_NOT_FOUND)
+        serializer = TimeSlipSerializer(time_slips, many=True)
+        return Response(serializer.data, status=HTTP_200_OK)
 
 class UpdateTimeSlip(TokenReq):
     def put(self, request, time_slip_id):
