@@ -127,3 +127,18 @@ export const updateCar = async (carId, newCarData) => {
         return null;
     }
 };
+
+export const generateTime = async (carId) => {
+    try {
+        let response = await api.post(`times/generate/${carId}/`);
+        if (response.status === 201) {
+            return response.data;
+        } else {
+            console.error('Failed to generate time slip', response.statusText);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error generating time slip:', error.message);
+        return null;
+    }
+};
