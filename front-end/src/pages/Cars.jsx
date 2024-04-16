@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getUserCars, createCar, deleteCar, updateCar } from "../utilities";
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
@@ -9,6 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from "react-bootstrap/esm/Button";
 
 const Cars = () => {
+    const { carId } = useParams();
     const [cars, setCars] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
@@ -90,6 +91,9 @@ const Cars = () => {
                   <Button variant="primary" onClick={() => handleShowEditModal(car)}>Edit</Button>
                   <Link to={`/race/${car.id}`}>
                     <Button variant="success">Race!</Button>
+                  </Link>
+                  <Link to={`/times/${car.id}`}>
+                    <Button variant="success">Times</Button>
                   </Link>
                 </Card.Body>
               </Card>

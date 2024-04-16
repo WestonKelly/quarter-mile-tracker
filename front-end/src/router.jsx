@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import Cars from "./pages/Cars";
 import RacePage from "./pages/RacePage";
+import TimesPage from "./pages/Times";
 import { userConfirmation } from "./utilities";
 
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: "/race/:carId",
                 element: <RacePage />
+            },
+            {
+                path: "/times/:carId",
+                element: <TimesPage />
             }
         ]
     }

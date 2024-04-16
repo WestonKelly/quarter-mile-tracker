@@ -142,3 +142,18 @@ export const generateTime = async (carId) => {
         return null;
     }
 };
+
+export const getCarTimes = async (carId) => {
+    try {
+        let response = await api.get(`times/all/car/${carId}/`);
+        if (response.status === 200) {
+            console.log(response.data)
+            return response.data;
+        }
+        alert(response.data);
+        return [];
+    } catch (e) {
+        alert(e.message);
+        return [];
+    };
+};
