@@ -157,3 +157,18 @@ export const getCarTimes = async (carId) => {
         return [];
     };
 };
+
+export const updateTimeSlip = async (time_slip_id, newTimeSlipData) => {
+    try {
+        let response = await api.post(`times/update/${time_slip_id}/`, newTimeSlipData);
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            console.error('Failed to update time slip:', response.statusText);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error editing time slip:', error.message);
+        return null;
+    }
+};
