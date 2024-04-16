@@ -160,7 +160,7 @@ export const getCarTimes = async (carId) => {
 
 export const updateTimeSlip = async (time_slip_id, newTimeSlipData) => {
     try {
-        let response = await api.post(`times/update/${time_slip_id}/`, newTimeSlipData);
+        let response = await api.put(`times/update/${time_slip_id}/`, newTimeSlipData);
         if (response.status === 200) {
             return response.data;
         } else {

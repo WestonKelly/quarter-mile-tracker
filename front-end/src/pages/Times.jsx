@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
-import { getCarTimes } from "../utilities";
+import { getCarTimes, updateTimeSlip } from "../utilities";
 
 const TimesPage = () => {
     const{ carId } = useParams();
@@ -14,7 +14,19 @@ const TimesPage = () => {
         setTimeSlips(await getCarTimes(carId));
     };
 
-    
+    const handleSubmitNotes = async (timeSlipId) => {
+        const success = await updateTimeSlip(timeSlipId, {notes: notes});
+        console.log(`Time slip id ${timeSlipId}`)
+        if (success) {
+            await fetchTimes();
+            setNotes('');
+        }
+    }
+
+    // const handleChange = (e) => {
+    //     const newNotes = e.target.value;
+    //     const formattedNotes = 
+    // }
 
     useEffect(() => {
         fetchTimes();
@@ -42,7 +54,10 @@ const TimesPage = () => {
                                 placeholder="Enter notes.."
                                 className="form-control mb2"
                             />
-                            <button onClick={() => handleSubmitNotes(timeSlip.id)} className="btn btn-primary">Submit</button>
+                            <button onClick={() => {
+                                handleSubmitNotes(timeSlip.id);
+                                console.log('TimeSlip.id', timeSlip.id);
+                            }} className="btn btn-primary">Submit</button>
                     </Accordion.Body>
                     </Accordion.Item>
             ))}

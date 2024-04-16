@@ -4,7 +4,8 @@ from .models import TimeSlip
 class TimeSlipSerializer(serializers.ModelSerializer):
     class Meta:
         model = TimeSlip
-        fields = ['car',
+        fields = ['id',
+                  'car',
                   'reaction_time',
                   'sixty_foot_time',
                   'three_thirty_foot_time',
