@@ -81,7 +81,7 @@ class UpdateTimeSlip(TokenReq):
                return Response({"message": "Unauthorized"}, status=HTTP_403_FORBIDDEN)
         except TimeSlip.DoesNotExist:
              return Response({"message": "Time slip not found"}, status=HTTP_404_NOT_FOUND)
-        serializer = TimeSlipSerializer(time_slip, data=request.data)
+        serializer = TimeSlipSerializer(time_slip, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=HTTP_200_OK)

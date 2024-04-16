@@ -14,3 +14,13 @@ class TimeSlipSerializer(serializers.ModelSerializer):
                   'notes',
                   'created_at'
                   ]
+        extra_kwargs = {
+            'notes': {'required': False},
+            'reaction_time': {'required': False},
+            'sixty_foot_time': {'required': False},
+            'three_thirty_foot_time': {'required': False},
+            'eighth_mile_time': {'required': False},
+            'quarter_mile_time': {'required': False},
+            'trap_speed': {'required': False},
+            'created_at': {'required': False}           
+        }
