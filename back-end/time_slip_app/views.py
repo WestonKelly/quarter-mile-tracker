@@ -107,7 +107,7 @@ class GenerateAiTime(TokenReq):
                 'eighth_mile_time':,
                 'quarter_mile_time':,
                 'trap_speed':
-                 and provide values that are slightly randomized so that the values are not round but still mostly accurate for a car with good traction of a track with good conditions."""
+                 and provide values that are slightly randomized so that the values are not round but still mostly accurate for a car with good traction on a track with good conditions."""
             },
             {
                 "role": "user",

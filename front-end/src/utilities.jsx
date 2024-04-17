@@ -172,3 +172,18 @@ export const updateTimeSlip = async (time_slip_id, newTimeSlipData) => {
         return null;
     }
 };
+
+export const getWeather = async () => {
+    try {
+        let response = await api.get("weather/");
+        if (response.status === 200) {
+            console.log(response.data)
+            console.log(response.data.data.values.temperature)
+            return response.data;
+        }
+        alert(response.data);
+        return [];
+    } catch (e) {
+        alert(e.message);
+    }
+};
