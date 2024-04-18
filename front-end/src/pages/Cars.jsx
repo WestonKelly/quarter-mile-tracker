@@ -77,8 +77,11 @@ const Cars = () => {
 
     return (
       <div className="background-cars-page">
-        <Container>
+        <Container className="text-center">
+          {cars.length > 0 ? (
         <h2>Your Cars</h2>
+          ):(
+            <h2>Create a car to start racing!</h2>)}
         <Row>
           {cars.map((car, index) => (
             <Col key={index} xs={12} md={6} lg={4}>

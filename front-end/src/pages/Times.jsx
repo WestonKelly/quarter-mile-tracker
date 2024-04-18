@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
+import Container from "react-bootstrap/esm/Container";
 import { getCarTimes, updateTimeSlip } from "../utilities";
 
 const TimesPage = () => {
@@ -35,9 +36,12 @@ const TimesPage = () => {
 
     return (
         <>
+        <div className="background-image">
+            <div>
+            <Container className="accordion-container">
              <Accordion defaultActiveKey="0" className="custom-accordion">
             {timeSlips && timeSlips.map((timeSlip, index) => (
-                    <Accordion.Item eventKey={index.toString()} className="custom-accordion-item bg-light" style={{ width: '400px' }}>
+                    <Accordion.Item eventKey={index.toString()} className="custom-accordion-item bg-light">
                     <Accordion.Header >{`ET: ${timeSlip.quarter_mile_time} @ ${timeSlip.trap_speed} MPH`}</Accordion.Header>
                     <Accordion.Body>
                             <p>{`Date: ${new Date(timeSlip.created_at).toLocaleString()}`}</p>
@@ -62,6 +66,9 @@ const TimesPage = () => {
                     </Accordion.Item>
             ))}
         </Accordion>
+        </Container>
+        </div>
+        </div>
         </>
 
     );

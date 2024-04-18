@@ -101,3 +101,32 @@ h2 {
 .welcome-message {
     margin-top: 20px;
 }
+
+.custom-accordion {
+    width: 100%; /* Ensures the accordion fills the container */
+    margin: auto; /* Centers the accordion horizontally */
+    max-width: 500px; /* Limits the width of each accordion item */
+    margin: auto; /* Centers the accordion items horizontally */
+    overflow-y: auto;
+    
+    
+    
+}
+
+.custom-accordion-item {
+    /* width: 100%; Ensures each accordion item fills the container */
+    padding: 20px;
+}
+
+.bg-light {
+    
+}
+
+.background-image {
+    background-image: url(https://s3.amazonaws.com/speedhunters-wp-production/wp-content/uploads/2016/11/28122137/Larry_Chen_Speedhunters_NHRA_2016_01-1200x800.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh; /* Ensure background covers the entire viewport */
+}
+

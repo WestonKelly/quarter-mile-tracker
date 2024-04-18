@@ -35,7 +35,7 @@ const RacePage = () => {
         <Container>
         <h2>Race Page for Car ID: {carId}</h2>
         {weather && (
-            <div>
+            <div className="weather-card">
                 {console.log("Weather data structure:", weather.data.values.temperature)}
                 <p>Temperature: {weather.data.values.temperature} Deg. F</p>
                 <p>Pressure Surface Level: {weather.data.values.pressureSurfaceLevel} inHg</p>

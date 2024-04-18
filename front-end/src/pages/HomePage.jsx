@@ -20,7 +20,7 @@ const HomePage = () => {
                     </div>
                 )}
                 {user && (
-                    <div className="button-container-cars-welcome">
+                    <div className="text-center">
                         <Link to="/cars/">
                             <Button variant="primary">Go to Cars</Button>
                         </Link>
