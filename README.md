@@ -12,7 +12,7 @@ to drivers on their way back to the pits on the return road. With some small cha
 * REACT.js front-end design and navigation
 
 # Features
-* Users enter an eamil and password to create an account
+* Users enter an email and password to create an account
 * Can create multiple instances of a car by entering info:
     - Year, make, model, horsepower, weight
 * Can then chose to do one of the following with the selected car:
