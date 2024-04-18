@@ -71,7 +71,7 @@ export const getUserCars = async () => {
         alert(response.data);
         return [];
     } catch (e) {
-        alert(e.message);
+        // alert(e.message);
         return [];
     }
 };

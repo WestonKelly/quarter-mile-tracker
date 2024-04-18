@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
 import Button from "react-bootstrap/esm/Button";
+import DropdownButton from 'react-bootstrap/Dropdown'
 
 const Cars = () => {
     const { carId } = useParams();
@@ -75,32 +76,36 @@ const Cars = () => {
     
 
     return (
+      <div className="background-cars-page">
         <Container>
-        <h2>User Cars</h2>
+        <h2>Your Cars</h2>
         <Row>
           {cars.map((car, index) => (
             <Col key={index} xs={12} md={6} lg={4}>
-              <Card>
+              <Card className="semi-transparent-card">
                 <Card.Body>
                   <Card.Title>{car.year} {car.make} {car.model}</Card.Title>
                   <Card.Text>
                     Horsepower: {car.horsepower}<br />
                     Weight: {car.weight}
                   </Card.Text>
+                  
                   <Button variant="danger" onClick={() => handleDeleteCar(car.id)}>Delete</Button>
                   <Button variant="primary" onClick={() => handleShowEditModal(car)}>Edit</Button>
-                  <Link to={`/race/${car.id}`}>
-                    <Button variant="success">Race!</Button>
-                  </Link>
                   <Link to={`/times/${car.id}`}>
                     <Button variant="success">Times</Button>
+                  </Link>
+                  <Link to={`/race/${car.id}`}>
+                    <Button variant="success">Race!</Button>
                   </Link>
                 </Card.Body>
               </Card>
             </Col>
           ))}
         </Row>
-        <Button variant="primary" onClick={handleShowModal}>Add New Car</Button>
+        <div className="add-car-button">
+        <Button variant="primary"  onClick={handleShowModal}>Add New Car</Button>
+        </div>
         <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Add New Car</Modal.Title>
@@ -168,6 +173,7 @@ const Cars = () => {
         </Modal.Footer>
       </Modal>
       </Container>
+      </div>
     )
 };
 

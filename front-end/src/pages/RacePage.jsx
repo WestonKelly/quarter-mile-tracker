@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { generateTime, getWeather } from "../utilities";
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Container from "react-bootstrap/esm/Container";
 
 const RacePage = () => {
     const { carId } = useParams();
@@ -29,6 +31,8 @@ const RacePage = () => {
 
     return (
         <>
+        <div className="background-race-page">
+        <Container>
         <h2>Race Page for Car ID: {carId}</h2>
         {weather && (
             <div>
@@ -37,9 +41,11 @@ const RacePage = () => {
                 <p>Pressure Surface Level: {weather.data.values.pressureSurfaceLevel} inHg</p>
             </div>
         )}
-        <button onClick={handleRaceButtonClick}>Race!</button>
+        <div className="text-center mb-3">
+         <Button variant="primary" onClick={handleRaceButtonClick}>Race!</Button>
+         </div>
         {raceData && (
-                <Card>
+                <Card className="semi-transparent-card">
                     <Card.Body>
                         <Card.Title>Latest Race Data</Card.Title>
                         <Card.Text>
@@ -55,6 +61,8 @@ const RacePage = () => {
                     </Card.Body>
                 </Card>
             )}
+            </Container>
+            </div>
         </>
     )
 };

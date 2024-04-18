@@ -11,7 +11,9 @@ const SignUp = () => {
 
     return (
         <>
-           <h1>SignUp</h1>
+        <div className="main-container">
+           <h1>Sign Up</h1>
+        <div className="inner-container">
       <Form
         onSubmit={async (e) => [
           e.preventDefault(),
@@ -43,7 +45,9 @@ const SignUp = () => {
         <Button variant="primary" type="submit">
           Submit
         </Button>
-      </Form> 
+      </Form>
+      </div>
+      </div> 
         </>
     )
 

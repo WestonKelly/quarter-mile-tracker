@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useOutletContext } from "react-router-dom";
 import { userLogIn } from "../utilities";
+import './AuthForms.css';
 
 const LogIn = () => {
     const [email, setEmail] = useState("");
@@ -11,7 +12,9 @@ const LogIn = () => {
 
     return (
         <>
+        <div className="main-container">
         <h1>Log In</h1>
+        <div className="inner-container">
         <Form
           onSubmit={async (e) => [
             e.preventDefault(),
@@ -44,6 +47,8 @@ const LogIn = () => {
             Submit
           </Button>
         </Form>
+        </div>
+        </div>
       </> 
     );
 };
