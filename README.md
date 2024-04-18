@@ -1,4 +1,4 @@
-# Quarter-mile-tracker
+# Quarter mile tracker
 The purpose of this app is to provide participants of quarter-mile drag racing events the ability to receive 
 and organize their time slips electronically. Most race tracks currently still only provide printed time slips
 to drivers on their way back to the pits on the return road. With some small changes to the track timing equipment, drivers can receive and mannage their time slips more efficiently. For demonstration purposes in this app, users will receive AI-generated time slips based on user-provided horsepower and weight values. 
