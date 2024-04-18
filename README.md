@@ -14,12 +14,12 @@ to drivers on their way back to the pits on the return road. With some small cha
 # Features
 * Users enter an eamil and password to create an account
 * Can create multiple instances of a car by entering info:
-    -Year, make, model, horsepower, weight
+    - Year, make, model, horsepower, weight
 * Can then chose to do one of the following with the selected car:
-    -Delete, edit, race, view time slips
+    - Delete, edit, race, view time slips
 * Race page allows users to:
-    -View current temperature and surface pressure for the city where the track is located
-    -Create an AI-generated time slip to simulate use in a live track environment
+    - View current temperature and surface pressure for the city where the track is located
+    - Create an AI-generated time slip to simulate use in a live track environment
 * Can click "times" button on a particular car to:
-    -view an accordion list of all time slips for that car
-    -add and submit notes about each time slip ("Tire pressure, launch RPM, shock settings"...etc)
+    - view an accordion list of all time slips for that car
+    - add and submit notes about each time slip  ("Tire pressure, launch RPM, shock settings"...etc)
